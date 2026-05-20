@@ -43,7 +43,7 @@ It's called "Naive" because it assumes all words are independent of each other �
 
 ---
 
-## ⚙️ Setup & Run
+##  Setup & Run
 
 ### Install dependencies
 ```bash
@@ -62,7 +62,7 @@ python predict.py
 
 ---
 
-## 📊 Sample Output
+##  Sample Output
 
 ```
 Model Accuracy: 100.00%
@@ -77,7 +77,7 @@ Result   : Negative  (Confidence: 97.1%)
 
 ---
 
-## 📚 Concepts Used
+##  Concepts Used
 
 | Concept | Description |
 |---|---|
