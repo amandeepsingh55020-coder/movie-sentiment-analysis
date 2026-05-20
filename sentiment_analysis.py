@@ -1,8 +1,3 @@
-# ============================================================
-#   Movie Sentiment Analysis using Bag of Words + Naive Bayes
-#   Author: Your Name
-#   Description: Classifies movie reviews as Positive or Negative
-# ============================================================
 
 import numpy as np
 import pandas as pd
@@ -13,12 +8,6 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 import pickle
-
-# ─────────────────────────────────────────────
-# STEP 1: Sample Dataset (Movie Reviews)
-# ─────────────────────────────────────────────
-# In real projects, you'd load a CSV like IMDB dataset
-# Here we use a small built-in dataset to keep it simple
 
 reviews = [
     "This movie was absolutely wonderful and amazing",
@@ -48,9 +37,9 @@ labels = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # 0 = Negative
 ]
 
-# ─────────────────────────────────────────────
+
 # STEP 2: Text Preprocessing
-# ─────────────────────────────────────────────
+
 
 def preprocess_text(text):
     """
@@ -60,9 +49,9 @@ def preprocess_text(text):
       2. Remove punctuation
       3. Remove extra whitespace
     """
-    text = text.lower()                            # lowercase
-    text = re.sub(r'[^\w\s]', '', text)            # remove punctuation
-    text = re.sub(r'\s+', ' ', text).strip()       # remove extra spaces
+    text = text.lower()                            
+    text = re.sub(r'[^\w\s]', '', text)            
+    text = re.sub(r'\s+', ' ', text).strip()       
     return text
 
 # Apply preprocessing
@@ -71,14 +60,11 @@ cleaned_reviews = [preprocess_text(r) for r in reviews]
 print("=" * 55)
 print("  MOVIE SENTIMENT ANALYSIS - Bag of Words + Naive Bayes")
 print("=" * 55)
-print(f"\n📦 Total Reviews: {len(cleaned_reviews)}")
+print(f"\n Total Reviews: {len(cleaned_reviews)}")
 print(f"   Positive: {labels.count(1)} | Negative: {labels.count(0)}")
 
-# ─────────────────────────────────────────────
 # STEP 3: Bag of Words (CountVectorizer)
-# ─────────────────────────────────────────────
-# CountVectorizer converts text into a matrix of token counts
-# Each word becomes a feature (column)
+
 
 vectorizer = CountVectorizer()
 X = vectorizer.fit_transform(cleaned_reviews)
@@ -102,54 +88,51 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 print(f"\n🔀 Train size: {X_train.shape[0]} | Test size: {X_test.shape[0]}")
 
-# ─────────────────────────────────────────────
 # STEP 5: Train Multinomial Naive Bayes
-# ─────────────────────────────────────────────
-# MultinomialNB is perfect for word count data (Bag of Words)
-# It uses Bayes theorem: P(class | words) ∝ P(words | class) * P(class)
+
 
 model = MultinomialNB()
 model.fit(X_train, y_train)
 
-print("\n✅ Model trained successfully!")
+print("\n Model trained successfully!")
 
-# ─────────────────────────────────────────────
+
 # STEP 6: Evaluate the Model
-# ─────────────────────────────────────────────
+
 
 y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 
-print(f"\n📈 Model Accuracy: {accuracy * 100:.2f}%")
-print("\n📋 Classification Report:")
+print(f"\n Model Accuracy: {accuracy * 100:.2f}%")
+print("\n Classification Report:")
 print(classification_report(y_test, y_pred, target_names=["Negative", "Positive"]))
 
-print("🔢 Confusion Matrix:")
+print(" Confusion Matrix:")
 cm = confusion_matrix(y_test, y_pred)
 print(f"   [[TN={cm[0][0]}  FP={cm[0][1]}]")
 print(f"    [FN={cm[1][0]}  TP={cm[1][1]}]]")
 
-# ─────────────────────────────────────────────
+
 # STEP 7: Predict on New Reviews
-# ─────────────────────────────────────────────
+
 
 def predict_sentiment(review_text):
     """
     Predict sentiment of a new movie review.
-    Returns: 'Positive 😊' or 'Negative 😞'
+    Returns: 'Positive ' or 'Negative '
     """
     cleaned = preprocess_text(review_text)
     vectorized = vectorizer.transform([cleaned])
     prediction = model.predict(vectorized)[0]
     probability = model.predict_proba(vectorized)[0]
     
-    sentiment = "Positive 😊" if prediction == 1 else "Negative 😞"
+    sentiment = "Positive " if prediction == 1 else "Negative "
     confidence = max(probability) * 100
     return sentiment, confidence
 
 # Test on new reviews
 print("\n" + "=" * 55)
-print("  🎬 TESTING ON NEW REVIEWS")
+print("   TESTING ON NEW REVIEWS")
 print("=" * 55)
 
 new_reviews = [
@@ -160,12 +143,12 @@ new_reviews = [
 
 for rev in new_reviews:
     sentiment, confidence = predict_sentiment(rev)
-    print(f"\n📝 Review  : {rev}")
+    print(f"\n Review  : {rev}")
     print(f"   Result  : {sentiment} (Confidence: {confidence:.1f}%)")
 
-# ─────────────────────────────────────────────
+
 # STEP 8: Save the Model
-# ─────────────────────────────────────────────
+
 
 with open("model.pkl", "wb") as f:
     pickle.dump(model, f)
@@ -173,6 +156,6 @@ with open("model.pkl", "wb") as f:
 with open("vectorizer.pkl", "wb") as f:
     pickle.dump(vectorizer, f)
 
-print("\n\n💾 Model saved as model.pkl and vectorizer.pkl")
+print("\n\n Model saved as model.pkl and vectorizer.pkl")
 print("    You can load these later to skip retraining!")
-print("\n✅ Done! Project complete.\n")
+print("\n Done! Project complete.\n")
