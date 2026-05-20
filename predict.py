@@ -1,7 +1,3 @@
-# ============================================================
-#   Load Saved Model & Predict
-#   Run this AFTER running sentiment_analysis.py at least once
-# ============================================================
 
 import pickle
 import re
@@ -19,16 +15,16 @@ with open("model.pkl", "rb") as f:
 with open("vectorizer.pkl", "rb") as f:
     vectorizer = pickle.load(f)
 
-print("✅ Model loaded successfully!\n")
+print(" Model loaded successfully!\n")
 
 # Interactive prediction loop
-print("🎬 Movie Sentiment Predictor")
+print(" Movie Sentiment Predictor")
 print("Type a movie review and press Enter. Type 'quit' to exit.\n")
 
 while True:
     review = input("Enter review: ").strip()
     if review.lower() == "quit":
-        print("Goodbye! 👋")
+        print("Goodbye! ")
         break
     if not review:
         continue
@@ -39,5 +35,5 @@ while True:
     proba = model.predict_proba(vectorized)[0]
     confidence = max(proba) * 100
 
-    sentiment = "Positive 😊" if prediction == 1 else "Negative 😞"
+    sentiment = "Positive " if prediction == 1 else "Negative "
     print(f"→ Sentiment: {sentiment}  |  Confidence: {confidence:.1f}%\n")
