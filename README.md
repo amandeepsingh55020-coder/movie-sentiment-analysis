@@ -1,4 +1,4 @@
-# 🎬 Movie Sentiment Analysis
+#  Movie Sentiment Analysis
 
 A beginner-friendly NLP project that classifies movie reviews as **Positive** or **Negative** using:
 - **Bag of Words** (CountVectorizer) for feature extraction
@@ -6,7 +6,7 @@ A beginner-friendly NLP project that classifies movie reviews as **Positive** or
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 movie-sentiment-analysis/
@@ -20,7 +20,7 @@ movie-sentiment-analysis/
 
 ---
 
-## 🧠 How It Works
+##  How It Works
 
 ### 1. Bag of Words (BoW)
 Converts text into numerical features by counting word occurrences.
@@ -69,10 +69,10 @@ Model Accuracy: 100.00%
 
 Testing on New Reviews:
 Review   : This film was absolutely breathtaking
-Result   : Positive 😊 (Confidence: 98.4%)
+Result   : Positive  (Confidence: 98.4%)
 
 Review   : I hated every minute of this terrible movie
-Result   : Negative 😞 (Confidence: 97.1%)
+Result   : Negative  (Confidence: 97.1%)
 ```
 
 ---
@@ -89,7 +89,7 @@ Result   : Negative 😞 (Confidence: 97.1%)
 
 ---
 
-## 🚀 Future Improvements
+##  Future Improvements
 
 - Use IMDB dataset (50,000 reviews) instead of sample data
 - Add TF-IDF vectorization
@@ -98,6 +98,4 @@ Result   : Negative 😞 (Confidence: 97.1%)
 
 ---
 
-## 👤 Author
 
-Made with ❤️ as a beginner NLP project.
